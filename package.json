@@ -1,0 +1,57 @@
+{
+  "name": "api-service",
+  "version": "1.0.0",
+  "description": "Abstraccion para conectar a Rest Service",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "tsc & concurrently \"tsc -w\" \"karma start\" \"lite-server -c test-bs-config.json\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uhilari/api-service.git"
+  },
+  "keywords": [
+    "api",
+    "service",
+    "angular2",
+    "rest",
+    "service",
+    "http"
+  ],
+  "author": "Uber Hilari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uhilari/api-service/issues"
+  },
+  "homepage": "https://github.com/uhilari/api-service#readme",
+  "dependencies": {
+    "@angular/common": "~2.0.2",
+    "@angular/compiler": "~2.0.2",
+    "@angular/core": "~2.0.2",
+    "@angular/forms": "~2.0.2",
+    "@angular/http": "~2.0.2",
+    "@angular/platform-browser": "~2.0.2",
+    "@angular/platform-browser-dynamic": "~2.0.2",
+    "@angular/router": "~3.0.2",
+    "@angular/upgrade": "~2.0.2",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.39",
+    "zone.js": "^0.6.25"
+  },
+  "devDependencies": {
+    "concurrently": "^3.1.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-htmlfile-reporter": "^0.3.4",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "lite-server": "^2.2.2",
+    "tsc": "^1.20150623.0",
+    "typescript": "^2.0.3",
+    "typings": "^1.4.0"
+  }
+}

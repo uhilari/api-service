@@ -1,0 +1,12 @@
+# Carpetas
+node_modules
+typings
+test-result
+
+# compilados
+src/**/*.js
+src/**/*.js.map
+test/**/*.js
+test/**/*.js.map
+
+#resultados
