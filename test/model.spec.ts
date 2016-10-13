@@ -15,12 +15,15 @@ describe('Model Testing', ()=> {
 	});
 
 	describe('Save New', () => {
+
 		it('Successfull', () => {
 			apiMock.request = (url: string) => {
 				if (url !== "/nv")
 					throw Error("Url is not for new");
 				return new Observable<void>(() => {});
-			}
+			};
+
+			model.save();
 		});
 	});
 });
