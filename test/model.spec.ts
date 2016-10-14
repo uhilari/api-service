@@ -8,22 +8,21 @@ describe('Model Testing', ()=> {
 	let apiMock: ApiService = {
 		request: () => new Observable<void>(() => {})
 	};
+	let id = "1";
+	let data = { Nombre: "Juan Perez" };
 
 	it('Model Created', () => {
-		model = new ModelObject("1", { Nombre: "Juan Perez" }, apiMock);
+		model = new ModelObject(id, data, apiMock);
 		expect(model).toBeDefined();
 	});
 
 	describe('Save New', () => {
-
 		it('Successfull', () => {
-			apiMock.request = (url: string) => {
-				if (url !== "/nv")
-					throw Error("Url is not for new");
-				return new Observable<void>(() => {});
-			};
+			spyOn(apiMock, 'request');
+			model = new ModelObject("", data, apiMock);
 
 			model.save();
+			expect(apiMock.request).toHaveBeenCalledWith("/nv", data);
 		});
 	});
 });
