@@ -1,11 +1,5 @@
 import { Observable } from 'rxjs/Rx';
-import { ApiService } from './api.service';
-import { ApiConfig } from './config';
-
-export interface Model {
-	save(): Observable<void>;
-	delete(): Observable<void>;
-}
+import { ApiConfig, ApiService, Model } from './config';
 
 export class ModelObject implements Model {
 	constructor(private _id: string, private _data: any, private _api: ApiService) {

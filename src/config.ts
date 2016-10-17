@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Rx';
+
 export interface ApiConfigs {
 	[nombre: string]: ApiConfig
 }
@@ -22,4 +24,17 @@ export enum OperacionTipo {
 	Post,
 	Put,
 	Delete
+}
+
+export interface ApiService{
+	get<T>(url: string): Observable<T>;
+	post(url: string, data: any): Observable<void>;
+	put(url: string, data: any): Observable<void>;
+	delete(url: string): Observable<void>;
+	createModel<T extends Model>(id?: any): Observable<T>;
+}
+
+export interface Model {
+	save(): Observable<void>;
+	delete(): Observable<void>;
 }

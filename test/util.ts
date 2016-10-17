@@ -17,14 +17,20 @@ export function mockError(): Observable<any> {
 	});
 }
 
-export function toHaveBeenCallNext<T>(obs: Observable<T>) {
+export function toHaveBeenCallNext<T>(obs: Observable<T>): Observable<T> {
 	var fnc = jasmine.createSpy('success');
 	obs.subscribe(fnc);
-	expect(fnc).toHaveBeenCalled();	
+	obs.finally(() => {
+		expect(fnc).toHaveBeenCalled();	
+	});
+	return obs;
 }
 
-export function toHaveBeenCallError<T>(obs: Observable<T>) {
+export function toHaveBeenCallError<T>(obs: Observable<T>): Observable<T> {
 	var fnc = jasmine.createSpy('error');
 	obs.subscribe(null, fnc);
-	expect(fnc).toHaveBeenCalled();	
+	obs.finally(() => {
+		expect(fnc).toHaveBeenCalled();	
+	});
+	return obs;
 }

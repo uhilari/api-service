@@ -7,9 +7,11 @@ import { mockObservableEmpty, mockNext, mockError, toHaveBeenCallNext, toHaveBee
 describe('Model', ()=> {
 	let model: Model;
 	let apiMock: ApiService = {
+		get: mockObservableEmpty,
 		post: mockObservableEmpty,
 		put: mockObservableEmpty,
-		delete: mockObservableEmpty
+		delete: mockObservableEmpty,
+		createModel: mockObservableEmpty
 	};
 	let id = "1";
 	let data = { Nombre: "Juan Perez" };
