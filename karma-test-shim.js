@@ -30,7 +30,14 @@ System.config({
     '@angular/platform-browser-dynamic/testing': 'npm:@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
     '@angular/http/testing': 'npm:@angular/http/bundles/http-testing.umd.js',
     '@angular/router/testing': 'npm:@angular/router/bundles/router-testing.umd.js',
-    '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js'
+    '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js',
+    'test': 'test'
+  },
+
+  packages: {
+    test: {
+      defaultExtension: 'js'
+    }
   }
 });
 
