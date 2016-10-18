@@ -18,6 +18,7 @@ export interface OperacionConfig {
 	url: string;
 	tipo?: RequestMethod
 	parametros?: any
+	static?: boolean;
 }
 
 export interface ApiService{

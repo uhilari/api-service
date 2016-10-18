@@ -1,4 +1,5 @@
 import { Observer, Observable } from 'rxjs/Rx';
+import { Response } from '@angular/http';
 
 export function mockObservableEmpty(): Observable<any> {
 	return new Observable<any>(obs => {});
@@ -33,4 +34,9 @@ export function toHaveBeenCallError<T>(obs: Observable<T>): Observable<T> {
 		expect(fnc).toHaveBeenCalled();	
 	});
 	return obs;
+}
+
+export class MockError extends Response implements Error{
+	name: any;
+	message: any;
 }

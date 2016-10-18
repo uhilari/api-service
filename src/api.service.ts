@@ -1,10 +1,11 @@
 import { Observable, Observer } from 'rxjs/Rx';
 import { Http, RequestOptionsArgs, RequestMethod } from '@angular/http';
-import { ApiService, ApiRequest, Model } from './config';
+import { ApiConfig, ApiService, ApiRequest, Model } from './config';
 import { ModelObject } from './model';
+import { ApiExtender } from './extender';
 
 export class ApiServiceObject implements ApiService, ApiRequest {
-	constructor(private baseUrl: string, private http: Http){}
+	constructor(private baseUrl: string, private http: Http, private config: ApiConfig) {}
 
 	public request<T>(url: string, options?: RequestOptionsArgs): Observable<T>{
 		let opts: RequestOptionsArgs = options || {};
@@ -14,18 +15,22 @@ export class ApiServiceObject implements ApiService, ApiRequest {
 
 	public createModel<T extends Model>(id?: any): Observable<T>{
 		return new Observable<T>((obs: Observer<T>) => {
-			if (id) {
-				let model: any = new ModelObject("", {}, this);
+			let opts = ApiExtender.filter(this.config.operaciones, c => c.static == false);
+			let complete = (model: any) => {
+				ApiExtender.Extend(model, opts, this);
 				obs.next(model);
 				obs.complete();
-			}
-			else {
+			};
+			if (id) {
 				this.request<any>("/un/" + id, { method: RequestMethod.Get })
 					.subscribe(m => {
-						let model: any = new ModelObject(id, m, this);
-						obs.next(model);
-						obs.complete();
+						complete(new ModelObject(id, m, this));
+					}, r => {
+						obs.error(r);
 					});
+			}
+			else {
+				complete(new ModelObject("", {}, this));
 			}
 		});
 	}
