@@ -1,17 +1,14 @@
 import { Observable } from 'rxjs/Rx';
 import { TestBed } from '@angular/core/testing';
-import { Model, ApiService } from '../src/index';
+import { RequestMethod } from '@angular/http';
+import { Model, ApiRequest } from '../src/index';
 import { ModelObject } from '../src/model';
 import { mockObservableEmpty, mockNext, mockError, toHaveBeenCallNext, toHaveBeenCallError } from './util';
 
 describe('Model', ()=> {
 	let model: Model;
-	let apiMock: ApiService = {
-		get: mockObservableEmpty,
-		post: mockObservableEmpty,
-		put: mockObservableEmpty,
-		delete: mockObservableEmpty,
-		createModel: mockObservableEmpty
+	let apiMock: ApiRequest = {
+		request: mockObservableEmpty
 	};
 	let id = "1";
 	let data = { Nombre: "Juan Perez" };
@@ -26,23 +23,22 @@ describe('Model', ()=> {
 			model = new ModelObject("", data, apiMock);
 		});
 		it('Call New', () => {
-			spyOn(apiMock, 'post');
-
+			spyOn(apiMock, 'request');
 			model.save();
-			expect(apiMock.post).toHaveBeenCalledWith("/nv", data);
+			expect(apiMock.request).toHaveBeenCalledWith("/nv", { method: RequestMethod.Post, body: data });
 		});
 		it('Call Update', () => {
-			spyOn(apiMock, 'put');
+			spyOn(apiMock, 'request');
 			model['_id'] = "1";
 			model.save();
-			expect(apiMock.put).toHaveBeenCalledWith("/md/1", data);
+			expect(apiMock.request).toHaveBeenCalledWith("/md/1", { method: RequestMethod.Put, body: data });
 		});
 		it('Call Observable Next', () => {
-			apiMock.post = mockNext;
+			apiMock.request = mockNext;
 			toHaveBeenCallNext(model.save());
 		})
 		it('Call Observable Error', () => {
-			apiMock.post = mockError;
+			apiMock.request = mockError;
 			toHaveBeenCallError(model.save());
 		})
 	});
@@ -52,23 +48,23 @@ describe('Model', ()=> {
 			model = new ModelObject("", data, apiMock);
 		});
 		it ('Call Delete', () => {
-			spyOn(apiMock, 'delete');
+			spyOn(apiMock, 'request');
 			model["_id"] = "1";
 			model.delete();
-			expect(apiMock.delete).toHaveBeenCalledWith("/rm/1");
+			expect(apiMock.request).toHaveBeenCalledWith("/rm/1", { method: RequestMethod.Delete });
 		});
 		it ('Don\'t call api', () => {
-			spyOn(apiMock, 'delete');
+			spyOn(apiMock, 'request');
 			model.delete();
-			expect(apiMock.delete).not.toHaveBeenCalled();
+			expect(apiMock.request).not.toHaveBeenCalled();
 		});
 		it('Call Observable Next', () => {
-			apiMock.delete = mockNext;
+			apiMock.request = mockNext;
 			toHaveBeenCallNext(model.delete());
 		})
 		it('Call Observable Error', () => {
 			model["_id"] = "1";
-			apiMock.delete = mockError;
+			apiMock.request = mockError;
 			toHaveBeenCallError(model.delete());
 		})
 	});

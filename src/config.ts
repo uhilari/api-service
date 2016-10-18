@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs/Rx';
+import { RequestMethod, RequestOptionsArgs } from '@angular/http';
 
 export interface ApiConfigs {
 	[nombre: string]: ApiConfig
@@ -15,23 +16,16 @@ export interface OperacionConfigList {
 
 export interface OperacionConfig {
 	url: string;
-	tipo?: OperacionTipo
+	tipo?: RequestMethod
 	parametros?: any
 }
 
-export enum OperacionTipo {
-	Get,
-	Post,
-	Put,
-	Delete
+export interface ApiService{
+	createModel<T extends Model>(id?: any): Observable<T>;
 }
 
-export interface ApiService{
-	get<T>(url: string): Observable<T>;
-	post(url: string, data: any): Observable<void>;
-	put(url: string, data: any): Observable<void>;
-	delete(url: string): Observable<void>;
-	createModel<T extends Model>(id?: any): Observable<T>;
+export interface ApiRequest {
+	request<T>(url: string, options?: RequestOptionsArgs)
 }
 
 export interface Model {
