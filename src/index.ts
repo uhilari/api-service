@@ -1,1 +1,1 @@
-export { Model, ApiService, ApiRequest, ApiConfigs, ApiConfig } from './config';
+export { Model, ApiFactory, ApiService, ApiRequest, ApiConfigs, ApiConfig } from './config';

@@ -21,6 +21,10 @@ export interface OperacionConfig {
 	static?: boolean;
 }
 
+export interface ApiFactory {
+	createService(nombre: string): ApiService;
+}
+
 export interface ApiService{
 	createModel<T extends Model>(id?: any): Observable<T>;
 }

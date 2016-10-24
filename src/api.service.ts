@@ -5,7 +5,10 @@ import { ModelObject } from './model';
 import { ApiExtender } from './extender';
 
 export class ApiServiceObject implements ApiService, ApiRequest {
-	constructor(private baseUrl: string, private http: Http, private config: ApiConfig) {}
+	private baseUrl: string;
+	constructor(private http: Http, private config: ApiConfig) {
+		this.baseUrl = config.url;
+	}
 
 	public request<T>(url: string, options?: RequestOptionsArgs): Observable<T>{
 		let opts: RequestOptionsArgs = options || {};

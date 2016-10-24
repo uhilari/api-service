@@ -22,7 +22,7 @@ describe('ApiService Testing', () => {
 			]
 		});
 		let cfg: ApiConfig = {
-			url: '/apisvc',
+			url: 'http://localhost:8010/apisvc',
 			operaciones: {
 				hijos: {
 					url: '/chld/{id}',
@@ -30,7 +30,7 @@ describe('ApiService Testing', () => {
 				}
 			}
 		};
-		apiService = new ApiServiceObject('http://localhost:8010/apisvc', TestBed.get(Http), cfg);
+		apiService = new ApiServiceObject(TestBed.get(Http), cfg);
 	});
 
 	it('Creado', () => {
