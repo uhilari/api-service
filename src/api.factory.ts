@@ -1,20 +1,30 @@
+import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
-import { ApiConfigs, ApiService, ApiFactory } from './config';
+import { ApiConfigs, ApiConfig, ApiService, API_CONFIG } from './config';
 import { ApiServiceObject } from './api.service';
 import { ApiExtender } from './extender';
 import { ApiConfigNotFoundException } from './errors';
 
-export class ApiFactoryObject implements ApiFactory {
-	constructor(private apiCfgs: ApiConfigs, private http: Http){
+@Injectable()
+export class ApiFactory {
+	constructor(
+		@Inject(API_CONFIG) private apiCfgs: ApiConfigs[], 
+		private http: Http) {
 	}
 
 	public createService(nombre: string): ApiService {
-		if (!this.apiCfgs.hasOwnProperty(nombre)){
-			throw new ApiConfigNotFoundException(nombre);
+		let cfg: ApiConfig = null;
+		for(let i = 0; i < this.apiCfgs.length; i++) {
+			if (this.apiCfgs[i].hasOwnProperty(nombre)){
+				cfg = this.apiCfgs[i][nombre];
+				break;
+			}			
 		}
-		let cfg = this.apiCfgs[nombre];
+		if (cfg == null) {
+			throw new ApiConfigNotFoundException(nombre);			
+		}
 		let service = new ApiServiceObject(this.http, cfg);
-		let opts = ApiExtender.filter(cfg.operaciones, c => c.static);
+		let opts = ApiExtender.filter(cfg.operaciones, c => c.static == true);
 		ApiExtender.Extend(service, opts, service);
 		return service;
 	}

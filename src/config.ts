@@ -1,5 +1,8 @@
 import { Observable } from 'rxjs/Rx';
+import { OpaqueToken } from '@angular/core';
 import { RequestMethod, RequestOptionsArgs } from '@angular/http';
+
+export const API_CONFIG = new OpaqueToken('API_CONFIG');
 
 export interface ApiConfigs {
 	[nombre: string]: ApiConfig
@@ -19,10 +22,6 @@ export interface OperacionConfig {
 	tipo?: RequestMethod
 	parametros?: any
 	static?: boolean;
-}
-
-export interface ApiFactory {
-	createService(nombre: string): ApiService;
 }
 
 export interface ApiService{

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
+    "tst": "tsc & karma start",
     "test": "tsc & concurrently \"tsc -w\" \"karma start\" \"lite-server -c test-bs-config.json\""
   },
   "repository": {

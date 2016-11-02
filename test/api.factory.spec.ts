@@ -1,8 +1,8 @@
 import { TestBed, inject, tick } from '@angular/core/testing';
 import { Http, BaseRequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { ApiConfigs, ApiFactory } from '../src/index';
-import { ApiFactoryObject } from '../src/api.factory';
+import { ApiConfigs } from '../src/index';
+import { ApiFactory } from '../src/api.factory';
 import { ApiConfigNotFoundException } from '../src/errors';
 
 describe('ApiFactory', () => {
@@ -20,7 +20,7 @@ describe('ApiFactory', () => {
 				}
 			]
 		});
-		let cfgs: ApiConfigs = {
+		let cfgs: ApiConfigs[] = [{
 			"model": {
 				url: '/apisvc',
 				operaciones: {
@@ -34,8 +34,8 @@ describe('ApiFactory', () => {
 					}
 				}
 			}
-		};
-		factory = new ApiFactoryObject(cfgs, TestBed.get(Http));
+		}];
+		factory = new ApiFactory(cfgs, TestBed.get(Http));
 	});
 
 	it('Creado', () => {
