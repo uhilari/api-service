@@ -2,6 +2,7 @@
 node_modules
 typings
 test-result
+dist
 
 # compilados
 src/**/*.js

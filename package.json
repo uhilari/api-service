@@ -4,7 +4,9 @@
   "description": "Abstraccion para conectar a Rest Service",
   "main": "index.js",
   "scripts": {
+    "uglify": "uglifyjs dist/**/*.js > dist/core.js",
     "tsc": "tsc",
+    "tscb": "tsc -p build-tsconfig.json",
     "tst": "tsc & karma start",
     "test": "tsc & concurrently \"tsc -w\" \"karma start\" \"lite-server -c test-bs-config.json\""
   },
@@ -53,6 +55,7 @@
     "lite-server": "^2.2.2",
     "tsc": "^1.20150623.0",
     "typescript": "^2.0.3",
-    "typings": "^1.4.0"
+    "typings": "^1.4.0",
+    "uglify-js": "^2.7.4"
   }
 }
