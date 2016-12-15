@@ -4,7 +4,7 @@
   "description": "Abstraccion para conectar a Rest Service",
   "main": "index.js",
   "scripts": {
-    "build": "tsc --p ./tsconfig-prd.json",
+    "build": "tsc -d --p ./tsconfig-prd.json",
     "clean": "rm -rf dist",
     "uglify": "uglifyjs dist/**/*.js > dist/core.js",
     "tsc": "tsc",
